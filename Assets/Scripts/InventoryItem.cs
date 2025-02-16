@@ -44,6 +44,8 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         myItem = item;
         itemIcon.sprite = item.sprite;
 
+        Amount += 1;
+
         if (myItem.maxStack < 2)
         {
             textBox.gameObject.SetActive(false);
@@ -52,9 +54,14 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (activeSlot != null)
+        {
+            activeSlot.OnPointerClick(eventData);
+            return;
+        }
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Inventory.Singleton.SetCarriedItem(this);
+            //Inventory.Singleton.SetCarriedItem(this);
         }
     }
 }

@@ -1,14 +1,22 @@
+using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [Header("Slots")]
+    public int numOfInventory = 36;
+    public int numOfHotbars = 9;
+    [SerializeField] GameObject InventoryContainer;
+    [SerializeField] GameObject HotbarContainer;
+    [SerializeField] InventorySlot slotPrefab;
+
     public static Inventory Singleton;
     public static InventoryItem carriedItem;
 
-    [SerializeField] InventorySlot[] inventorySlots;
-    [SerializeField] InventorySlot[] hotbarSlots;
+    [SerializeField] public List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    [SerializeField] public List<InventorySlot> hotbarSlots = new List<InventorySlot>();
 
     // 0=Head, 1=Chest, 2=Legs, 3=Feet
     //[SerializeField] InventorySlot[] equipmentSlots;
@@ -26,6 +34,17 @@ public class Inventory : MonoBehaviour
     {
         Singleton = this;
         giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
+
+        for (int i = 0; i < numOfHotbars; i++)
+        {
+            InventorySlot newSlot = Instantiate(slotPrefab, HotbarContainer.transform);
+            hotbarSlots.Add(newSlot);
+        }
+        for (int i = 0; i < numOfInventory; i++)
+        {
+            InventorySlot newSlot = Instantiate(slotPrefab, InventoryContainer.transform);
+            inventorySlots.Add(newSlot);
+        }
     }
 
     void Update()
