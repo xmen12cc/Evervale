@@ -3,6 +3,15 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Backpack
+{
+    DEFAULT,
+    Travelers,
+    Adventurers,
+    Wayfarers,
+    Everwoven
+}
+
 public class Inventory : MonoBehaviour
 {
     [Header("Slots")]
@@ -17,6 +26,16 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] public List<InventorySlot> inventorySlots = new List<InventorySlot>();
     [SerializeField] public List<InventorySlot> hotbarSlots = new List<InventorySlot>();
+
+    [Header("Upgrades")]
+    public Backpack backpack;
+    Dictionary<Backpack, Dictionary<string, object>> backpackDetails = new Dictionary<Backpack, Dictionary<string, object>> {
+        { Backpack.DEFAULT, new Dictionary<string, object> { { "numOfInventory", 9 }, { "numOfHotbars", 6 } } },
+        { Backpack.Travelers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 6 } } },
+        { Backpack.Adventurers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 9 } } },
+        { Backpack.Wayfarers, new Dictionary<string, object> { { "numOfInventory", 27 }, { "numOfHotbars", 9 } } },
+        { Backpack.Everwoven, new Dictionary<string, object> { { "numOfInventory", 36 }, { "numOfHotbars", 9 } } }
+    };
 
     // 0=Head, 1=Chest, 2=Legs, 3=Feet
     //[SerializeField] InventorySlot[] equipmentSlots;
