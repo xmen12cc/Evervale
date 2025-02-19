@@ -16,6 +16,9 @@ public class TD_PlayerController : MonoBehaviour
     private bool onSlope = false;
     private Vector3 slopeNormal;
 
+    [Header("temp")]
+    public CharacterAnimator character;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,6 +35,8 @@ public class TD_PlayerController : MonoBehaviour
     {
         RotatePlayer();
         MovePlayer();
+
+
     }
 
     public void RotatePlayer()
@@ -58,6 +63,20 @@ public class TD_PlayerController : MonoBehaviour
         //transform.Translate(movement * speed * Time.deltaTime * 0.07f, Space.World);
         //characterController.Move(movement * speed * Time.deltaTime);
         rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
+
+        float movementSum = Mathf.Abs(movement.x) + Mathf.Abs(movement.y) + Mathf.Abs(movement.z);
+        if (movementSum > 5f)
+        {
+            character.SetCharacterState(CharacterState.Running);
+        }
+        else if (movementSum > 0.1f)
+        {
+            character.SetCharacterState(CharacterState.Walking);
+        }
+        else
+        {
+            character.SetCharacterState(CharacterState.Idle);
+        }
     }
 
     bool OnSlope()

@@ -8,17 +8,17 @@ public enum Backpack
     DEFAULT,
     Travelers,
     Adventurers,
-    Wayfarers,
     Everwoven
 }
 
 public class Inventory : MonoBehaviour
 {
     [Header("Slots")]
-    public int numOfInventory = 36;
+    public int numOfInventory = 27;
     public int numOfHotbars = 9;
     [SerializeField] GameObject InventoryContainer;
     [SerializeField] GameObject HotbarContainer;
+    [SerializeField] GameObject HotbarDisplay;
     [SerializeField] InventorySlot slotPrefab;
 
     public static Inventory Singleton;
@@ -33,8 +33,7 @@ public class Inventory : MonoBehaviour
         { Backpack.DEFAULT, new Dictionary<string, object> { { "numOfInventory", 9 }, { "numOfHotbars", 6 } } },
         { Backpack.Travelers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 6 } } },
         { Backpack.Adventurers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 9 } } },
-        { Backpack.Wayfarers, new Dictionary<string, object> { { "numOfInventory", 27 }, { "numOfHotbars", 9 } } },
-        { Backpack.Everwoven, new Dictionary<string, object> { { "numOfInventory", 36 }, { "numOfHotbars", 9 } } }
+        { Backpack.Everwoven, new Dictionary<string, object> { { "numOfInventory", 27 }, { "numOfHotbars", 9 } } }
     };
 
     // 0=Head, 1=Chest, 2=Legs, 3=Feet
@@ -66,11 +65,31 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        CloseInventory();
+    }
+
     void Update()
     {
         if (carriedItem == null) return;
 
         carriedItem.transform.position = Input.mousePosition;
+    }
+
+    public void OpenInventory()
+    {
+        foreach (InventorySlot slot in hotbarSlots)
+        {
+            slot.transform.SetParent(HotbarContainer.transform);
+        }
+    }
+    public void CloseInventory()
+    {
+        foreach (InventorySlot slot in hotbarSlots)
+        {
+            slot.transform.SetParent(HotbarDisplay.transform);
+        }
     }
 
     public void SetCarriedItem(InventoryItem item)
