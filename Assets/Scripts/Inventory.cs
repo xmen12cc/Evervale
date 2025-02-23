@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     [Header("Slots")]
     public int numOfInventory = 27;
     public int numOfHotbars = 9;
+    public int PlayerGold = 500;
     [SerializeField] GameObject InventoryContainer;
     [SerializeField] GameObject HotbarContainer;
     [SerializeField] GameObject HotbarDisplay;
@@ -75,6 +76,18 @@ public class Inventory : MonoBehaviour
         if (carriedItem == null) return;
 
         carriedItem.transform.position = Input.mousePosition;
+    }
+
+    public void RemoveItem(Item item)
+    {
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            if (slot.myItem != null && slot.myItem == item)
+            {
+                inventorySlots.Remove(slot);
+                return;
+            }
+        }
     }
 
     public void OpenInventory()
@@ -235,4 +248,27 @@ public class Inventory : MonoBehaviour
         int random = Random.Range(0, items.Length);
         return items[random];
     }
+
+    public List<InventorySlot> GetItems()
+    {
+    return inventorySlots;
+    }
+
+    public void AddItem(Item item)
+    {
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            if (slot.myItem == null)
+            {
+                InventoryItem newItem = Instantiate(itemPrefab);
+                newItem.Initialize(item, slot);
+                slot.myItem = newItem;
+                return;
+            }
+        }
+
+    }
+
+
+
 }
