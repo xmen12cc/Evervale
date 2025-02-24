@@ -5,6 +5,7 @@ public enum ItemTag { None, Food, Tool }
 [CreateAssetMenu(menuName = "Scriptable Objects/Item")]
 public class Item : ScriptableObject
 {
+    [Header("Displayed Properties")]
     public Sprite sprite;
     public ItemTag itemTag;
     public int value;
