@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     public InventoryItem myItem { get; set; }
+    public bool interactable = true;
     private bool isHoldingItem = false;
 
     private Vector3 originalPosition;
@@ -12,55 +13,94 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
 
     //public SlotTag myTag;
 
+    public RectTransform border;
+
+    private void Awake()
+    {
+        border = GameObjectFinder.FindChildRecursive(gameObject, "BorderDesign").GetComponent<RectTransform>();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        Debug.Log("[InventorySlot][OnPointerClick/]");
+        if (interactable)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (eventData.button == PointerEventData.InputButton.Left)
             {
-                Debug.Log("shiftclick");
-                MoveItemBetweenSlots();
-                return;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Debug.Log("[InventorySlot][OnPointerClick][_ShiftClick]");
+                    MoveItemBetweenSlots();
+                    Debug.Log("[InventorySlot][OnPointerClick][MoveItemBetweenSlots()]");
+                    return;
+                }
             }
         }
+        Debug.Log("[InventorySlot][/]");
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left && myItem != null && !Input.GetKey(KeyCode.LeftShift))
+        Debug.Log("[InventorySlot][OnPointerDown/]");
+        if (interactable)
         {
-            Debug.Log("ClickHeld");
-            isHoldingItem = true;
-            Inventory.Singleton.SetCarriedItem(myItem);
+            if (eventData.button == PointerEventData.InputButton.Left && myItem != null && !Input.GetKey(KeyCode.LeftShift))
+            {
+                isHoldingItem = true;
+                Debug.Log("[InventorySlot][OnPointerDown][_ClickHeld]");
+                Inventory.Singleton.SetCarriedItem(myItem);
+                Debug.Log($"[InventorySlot][OnPointerDown][Inventory.SetCarriedItem({myItem.myItem.name})]");
 
-            // Save original position and slot in case we need to reset
-            originalPosition = myItem.transform.position;
-            originalSlot = myItem.activeSlot;
+                // Save original position and slot in case we need to reset
+                originalPosition = myItem.transform.position;
+                originalSlot = this;//myItem.activeSlot;
+            }
         }
+        Debug.Log("[InventorySlot][/]");
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (isHoldingItem)
+        Debug.Log("[InventorySlot][OnPointerUp/]");
+        if (interactable)
         {
-            Debug.Log("ClickReleased");
-
-            isHoldingItem = false;
-
-            // Check if we released over a valid slot
-            InventorySlot targetSlot = GetSlotUnderCursor();
-            if (targetSlot != null)
+            if (isHoldingItem)
             {
-                targetSlot.SetItem(Inventory.carriedItem);
-            }
-            else
-            {
-                // Reset to original slot if not dropped on a valid one
-                originalSlot.SetItem(Inventory.carriedItem);
-            }
+                isHoldingItem = false;
+                Debug.Log("[InventorySlot][OnPointerUp][_ClickReleased]");
 
-            Inventory.carriedItem = null;
+                // Check if we released over a valid slot
+                InventorySlot targetSlot = GetSlotUnderCursor();
+                //Debug.Log("[InventorySlot][OnPointerUp][targetSlot = GetSlotUnderCursor()]");
+                if (targetSlot != null)
+                {
+                    if (targetSlot.myItem == null)
+                    {
+                        targetSlot.SetItem(Inventory.carriedItem);
+                        Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} To TargetSlot]");
+                    }
+                    else
+                    {
+                        InventoryItem targetSlotItem = targetSlot.myItem;
+                        originalSlot.SetItem(targetSlotItem);
+                        Debug.Log($"[InventorySlot][OnPointerUp][Moved {originalSlot.myItem.myItem.name} To OriginalSlot]");
+                        targetSlot.SetItem(Inventory.carriedItem);
+                        originalSlot.myItem = targetSlotItem; // TEMP FIX FOR ORIGINAL SLOT
+                        Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} To TargetSlot]");
+                    }
+                }
+                else
+                {
+                    // Reset to original slot if not dropped on a valid one
+                    originalSlot.SetItem(Inventory.carriedItem);
+                    Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} Back To OriginalSlot]");
+                }
+
+                Debug.Log($"[InventorySlot][OnPointerUp][Set CarriedItem({Inventory.carriedItem.myItem.name}) To Null]");
+                Inventory.carriedItem = null;
+            }
         }
+        Debug.Log("[InventorySlot][/]");
     }
 
     private InventorySlot GetSlotUnderCursor()
@@ -88,10 +128,12 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
     public void SetItem(InventoryItem item)
     {
         if (item == null) return;
+        Debug.Log($"[InventorySlot][SetItem({item.myItem.name})/]");
 
-        Inventory.carriedItem = null;
+        //Inventory.carriedItem = null;
 
         // Reset old slot
+        if (item.activeSlot.myItem != null) { Debug.Log($"[InventorySlot][SetItem({item.myItem.name})/][Set {item.activeSlot.myItem.myItem.name} To Null]"); }
         item.activeSlot.myItem = null;
 
         // Set current slot
@@ -103,8 +145,11 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
 
         myItem.canvasGroup.blocksRaycasts = true;
 
+        if (border != null) { border.SetAsLastSibling(); }
+
         //if (myTag != SlotTag.None)
         //{ Inventory.Singleton.EquipEquipment(myTag, myItem); }
+        //Debug.Log("[InventorySlot][/]");
     }
 
     void MoveItemBetweenSlots()

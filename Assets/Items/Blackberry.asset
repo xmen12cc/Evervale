@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
   m_Name: Blackberry
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: -1234047991, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
   itemTag: 1
+  value: 0
   description: Fall Berry
   maxStack: 10
-  sellPrice: 0
   itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}

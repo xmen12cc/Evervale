@@ -84,7 +84,7 @@ public class HotbarController : MonoBehaviour
                     {
                         equippedItem = Instantiate(nextItem.itemPrefab);
 
-                        Debug.Log($"Before Parenting: Position={equippedItem.transform.position}, Scale={equippedItem.transform.localScale}");
+                        //Debug.Log($"Before Parenting: Position={equippedItem.transform.position}, Scale={equippedItem.transform.localScale}");
 
                         equippedItem.transform.SetParent(objectHolder.transform, false);
 
@@ -98,7 +98,7 @@ public class HotbarController : MonoBehaviour
                             1f / parentScale.z
                         );
 
-                        Debug.Log($"After Parenting: Position={equippedItem.transform.position}, Scale={equippedItem.transform.localScale}");
+                        //Debug.Log($"After Parenting: Position={equippedItem.transform.position}, Scale={equippedItem.transform.localScale}");
                     }
                 }
             }

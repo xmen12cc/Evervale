@@ -42,6 +42,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         activeSlot = parent;
         activeSlot.myItem = this;
         myItem = item;
+        if (itemIcon == null) { Awake(); } // Force Awake if added to storage mid game
         itemIcon.sprite = item.sprite;
 
         Amount += 1;

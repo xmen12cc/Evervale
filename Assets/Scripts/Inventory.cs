@@ -145,6 +145,7 @@ public class Inventory : MonoBehaviour
 
         foreach (InventorySlot slot in hotbarSlots)
         {
+            slot.interactable = true;
             slot.transform.SetParent(hotbarContainer.transform);
         }
     }
@@ -157,6 +158,7 @@ public class Inventory : MonoBehaviour
 
         foreach (InventorySlot slot in hotbarSlots)
         {
+            slot.interactable = false;
             slot.transform.SetParent(hotbarDisplay.transform);
         }
     }
@@ -257,6 +259,7 @@ public class Inventory : MonoBehaviour
                 {
 
                     Instantiate(itemPrefab, slot.transform).Initialize(_item, slot);
+                    if (slot.border != null) { slot.border.SetAsLastSibling(); }
                     break;
                 }
             }
