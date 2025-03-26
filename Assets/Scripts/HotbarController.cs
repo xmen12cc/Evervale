@@ -32,7 +32,8 @@ public class HotbarController : MonoBehaviour
     {
         for (int i = 0; i < inventory.hotbarSlots.Count; i++)
         {
-            if (Input.GetKeyDown((i + 1).ToString()))
+            int index = i; if (i + 1 == 10) { index = 0; }
+            if (Input.GetKeyDown((index + 1).ToString()))
             {
                 hotbarIndex = i;
                 selectedHotbar = GetHotbarSlotFromIndex(hotbarIndex);

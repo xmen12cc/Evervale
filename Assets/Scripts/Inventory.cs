@@ -18,8 +18,8 @@ public class Inventory : MonoBehaviour
     public int numOfHotbars = 9;
     public int PlayerGold = 500;
     [SerializeField] GameObject InventoryContainer;
-    [SerializeField] GameObject HotbarContainer;
-    [SerializeField] GameObject HotbarDisplay;
+    [SerializeField] GameObject InventoryPanel;//HotbarContainer;
+    [SerializeField] GameObject HotbarPanel;//HotbarDisplay;
     [SerializeField] InventorySlot slotPrefab;
 
     public static Inventory Singleton;
@@ -30,12 +30,43 @@ public class Inventory : MonoBehaviour
 
     [Header("Upgrades")]
     public Backpack backpack;
-    Dictionary<Backpack, Dictionary<string, object>> backpackDetails = new Dictionary<Backpack, Dictionary<string, object>> {
+    Dictionary<Backpack, Dictionary<string, Color>> backpackDetails = new Dictionary<Backpack, Dictionary<string, Color>>
+    {
+        { Backpack.DEFAULT, new Dictionary<string, Color>
+            {
+                { "baseColor", new Color(0.84f, 0.78f, 0.69f) },
+                { "outerColor", new Color(0.7f, 0.59f, 0.46f) },
+                { "depthColor", new Color(0.48f, 0.38f, 0.15f) }
+            }
+        },
+        { Backpack.Travelers, new Dictionary<string, Color>
+            {
+                { "baseColor", new Color(0, 0, 0) },
+                { "outerColor", new Color(0, 0, 0) },
+                { "depthColor", new Color(0, 0, 0) }
+            }
+        },
+        { Backpack.Adventurers, new Dictionary<string, Color>
+            {
+                { "baseColor", new Color(0, 0, 0) },
+                { "outerColor", new Color(0, 0, 0) },
+                { "depthColor", new Color(0, 0, 0) }
+            }
+        },
+        { Backpack.Everwoven, new Dictionary<string, Color>
+            {
+                { "baseColor", new Color(0, 0, 0) },
+                { "outerColor", new Color(0, 0, 0) },
+                { "depthColor", new Color(0, 0, 0) }
+            }
+        }
+    };
+    /*Dictionary<Backpack, Dictionary<string, object>> backpackDetails = new Dictionary<Backpack, Dictionary<string, object>> {
         { Backpack.DEFAULT, new Dictionary<string, object> { { "numOfInventory", 9 }, { "numOfHotbars", 6 } } },
         { Backpack.Travelers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 6 } } },
         { Backpack.Adventurers, new Dictionary<string, object> { { "numOfInventory", 18 }, { "numOfHotbars", 9 } } },
         { Backpack.Everwoven, new Dictionary<string, object> { { "numOfInventory", 27 }, { "numOfHotbars", 9 } } }
-    };
+    };*/
 
     // 0=Head, 1=Chest, 2=Legs, 3=Feet
     //[SerializeField] InventorySlot[] equipmentSlots;
@@ -49,19 +80,26 @@ public class Inventory : MonoBehaviour
     [Header("Debug")]
     [SerializeField] Button giveItemBtn;
 
+    [Header("Keybinds")]
+    [SerializeField] KeyCode toggleKey;
+    private bool isInventoryOpen = false;
+
     void Awake()
     {
         Singleton = this;
         giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
 
+        GameObject hotbarContainer = GameObjectFinder.FindChildRecursive(InventoryPanel, "Hotbar");
+        GameObject inventoryContainer = GameObjectFinder.FindChildRecursive(InventoryPanel, "Storage");
+
         for (int i = 0; i < numOfHotbars; i++)
         {
-            InventorySlot newSlot = Instantiate(slotPrefab, HotbarContainer.transform);
+            InventorySlot newSlot = Instantiate(slotPrefab, hotbarContainer.transform);
             hotbarSlots.Add(newSlot);
         }
         for (int i = 0; i < numOfInventory; i++)
         {
-            InventorySlot newSlot = Instantiate(slotPrefab, InventoryContainer.transform);
+            InventorySlot newSlot = Instantiate(slotPrefab, inventoryContainer.transform);
             inventorySlots.Add(newSlot);
         }
     }
@@ -69,13 +107,80 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         CloseInventory();
+
+        SetBackpack();
     }
 
     void Update()
     {
+        CheckKeys();
+
         if (carriedItem == null) return;
 
         carriedItem.transform.position = Input.mousePosition;
+    }
+
+    private void CheckKeys()
+    {
+        if (Input.GetKeyDown(toggleKey))
+        {
+            isInventoryOpen = !isInventoryOpen;
+            if (isInventoryOpen)
+            {
+                OpenInventory();
+            }
+            else
+            {
+                CloseInventory();
+            }
+        }
+    }
+
+    public void OpenInventory()
+    {
+        InventoryPanel.SetActive(true);
+        HotbarPanel.SetActive(false);
+
+        GameObject hotbarContainer = GameObjectFinder.FindChildRecursive(InventoryPanel, "Hotbar");
+
+        foreach (InventorySlot slot in hotbarSlots)
+        {
+            slot.transform.SetParent(hotbarContainer.transform);
+        }
+    }
+    public void CloseInventory()
+    {
+        InventoryPanel.SetActive(false);
+        HotbarPanel.SetActive(true);
+
+        GameObject hotbarDisplay = GameObjectFinder.FindChildRecursive(HotbarPanel, "Hotbar (Display)");
+
+        foreach (InventorySlot slot in hotbarSlots)
+        {
+            slot.transform.SetParent(hotbarDisplay.transform);
+        }
+    }
+
+    private void SetBackpack()
+    {
+        Color baseColor = Color.white;
+        Color outerColor = Color.gray;
+        Color depthColor = Color.black;
+
+        if (backpackDetails.TryGetValue(backpack, out Dictionary<string, Color> colors))
+        {
+            baseColor = colors["baseColor"];
+            outerColor = colors["outerColor"];
+            depthColor = colors["depthColor"];
+        }
+
+        InventoryPanel.GetComponent<Image>().color = baseColor;
+        GameObjectFinder.FindChildRecursive(InventoryPanel, "OuterDesign").GetComponent<Image>().color = outerColor;
+        GameObjectFinder.FindChildRecursive(InventoryPanel, "Hotbar").GetComponent<Image>().color = depthColor;
+        GameObjectFinder.FindChildRecursive(InventoryPanel, "Storage").GetComponent<Image>().color = depthColor;
+
+        HotbarPanel.GetComponent<Image>().color = baseColor;
+        GameObjectFinder.FindChildRecursive(HotbarPanel, "OuterDesign").GetComponent<Image>().color = outerColor;
     }
 
     public void RemoveItem(Item item)
@@ -87,21 +192,6 @@ public class Inventory : MonoBehaviour
                 inventorySlots.Remove(slot);
                 return;
             }
-        }
-    }
-
-    public void OpenInventory()
-    {
-        foreach (InventorySlot slot in hotbarSlots)
-        {
-            slot.transform.SetParent(HotbarContainer.transform);
-        }
-    }
-    public void CloseInventory()
-    {
-        foreach (InventorySlot slot in hotbarSlots)
-        {
-            slot.transform.SetParent(HotbarDisplay.transform);
         }
     }
 
