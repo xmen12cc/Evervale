@@ -136,6 +136,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool IsInventoryOpen()
+    {
+        return isInventoryOpen;
+    }
+
     public void OpenInventory()
     {
         InventoryPanel.SetActive(true);

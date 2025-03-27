@@ -70,7 +70,13 @@ public class HotbarController : MonoBehaviour
 
     void EquipItem()
     {
-        if (equippedItem != null) { Destroy(equippedItem); } // Remove previous tool
+        if (equippedItem != null) { 
+            if (equippedItem.GetComponent<BasicTool>())
+            {
+                if (equippedItem.GetComponent<BasicTool>().isActionPlaying) { Debug.Log("Can't Switch Because Action Is Still Playing");  return; }
+            }
+            Destroy(equippedItem); 
+        } // Remove previous tool
 
         if (selectedHotbar.myItem != null)
         {

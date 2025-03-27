@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public enum ToolTag { None, Mining, Woodcutting, Farming, Fighting }
@@ -13,6 +14,10 @@ public class BasicTool : MonoBehaviour
     public ToolTag toolTag;
     public float swingSpeed = 1;
 
+    Inventory inventory = Inventory.Singleton;
+
+    public bool isActionPlaying;
+
     void Start()
     {
         playerAnimator = GetComponentInParent<Animator>();
@@ -25,13 +30,39 @@ public class BasicTool : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!inventory.IsInventoryOpen())
         {
-            if (playerAnimator)
+            // Check if mouse down
+            //AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+            //Debug.Log($"Can swing? {(!stateInfo.IsName("Wallop") && !isActionPlaying)}");
+            if (Input.GetMouseButton(0))
             {
-                if (toolTag == ToolTag.Mining || toolTag == ToolTag.Woodcutting || toolTag == ToolTag.Farming)
+                if (playerAnimator)
                 {
-                    playerAnimator.SetTrigger("Wallop");
+                    // Check if animation is still playing
+                    AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+                    if (!stateInfo.IsName("Wallop") && !isActionPlaying)
+                    {
+                        if (toolTag == ToolTag.Mining || toolTag == ToolTag.Woodcutting || toolTag == ToolTag.Farming)
+                        {
+                            //Debug.Log("Wallop");
+                            playerAnimator.SetTrigger("Wallop");
+                            isActionPlaying = true;
+                        }
+                    }
+                }
+            }
+
+            // Detect when animation finishes
+            if (isActionPlaying)
+            {
+                AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+                //Debug.Log(stateInfo.normalizedTime);
+                if (stateInfo.IsName("Wallop") && stateInfo.normalizedTime >= 0.98f)
+                {
+                    isActionPlaying = false;
                 }
             }
         }
