@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
   m_Name: Raspberry
   m_EditorClassIdentifier: 
-  sprite: {fileID: -1234047991, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
+  sprite: {fileID: 1855858476, guid: c419824596849c24bad46d1588c769b9, type: 3}
   itemTag: 1
   value: 10
   description: Spring Berry

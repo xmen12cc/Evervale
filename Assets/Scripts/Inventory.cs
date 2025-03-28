@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -350,24 +351,76 @@ public class Inventory : MonoBehaviour
 
     public List<InventorySlot> GetItems()
     {
-    return inventorySlots;
+        return inventorySlots;
     }
 
-    public InventorySlot AddItem(Item item, int amount = 1)
+    public InventorySlot AddItem(Item item = null, int amount = 1, Loot lootObject = null)
     {
+        InventorySlot[] allInventorySlots = hotbarSlots.Concat(inventorySlots).ToArray();
+
+        Debug.Log($"[Inventory][AddItem] {item.name} (x{amount})");
+        //InventorySlot _slot = null;
+        int remainingAmount = amount;
+
+        // If item is stackable, try adding to an existing stack first
+        while (remainingAmount > 0)
+        {
+            InventorySlot stackableSlot = FindStackableSlot(item);
+            if (stackableSlot != null)
+            {
+                int availableSpace = stackableSlot.myItem.myItem.maxStack - stackableSlot.myItem.Amount;
+                if (remainingAmount <= availableSpace)
+                {
+                    stackableSlot.myItem.Amount += remainingAmount;
+                    return stackableSlot;
+                }
+                else
+                {
+                    stackableSlot.myItem.Amount = stackableSlot.myItem.myItem.maxStack;
+                    remainingAmount -= availableSpace;
+                }
+            }
+            else
+            {
+                break; // No more stackable slots available, move to empty slots
+            }
+        }
+
+        // If there are remaining items, place them in empty slots
+        if (remainingAmount > 0)
+        {
+            foreach (InventorySlot slot in hotbarSlots.Concat(inventorySlots))
+            {
+                if (slot.myItem == null)
+                {
+                    Instantiate(itemPrefab, slot.transform).Initialize(item, slot);
+                    slot.myItem.Amount = remainingAmount;
+                    if (slot.border != null) { slot.border.SetAsLastSibling(); }
+                    return slot;
+                }
+            }
+        }
+
+        return null; // Inventory is full
+
+        /*Debug.Log("[Inventory][AddItem] " + item.name);
         InventorySlot _slot = null;
         Item _item = item;
         int _amount = amount;
 
         InventorySlot stackableSlot = FindStackableSlot(_item);
-        if (stackableSlot != null)
+        if (stackableSlot != null) // if a stackable slot was found
         {
-            if (stackableSlot.myItem.Amount + _amount <= stackableSlot.myItem.myItem.maxStack)
+            if (stackableSlot.myItem.Amount + _amount <= stackableSlot.myItem.myItem.maxStack) // if the item's amount results in less than max
             {
                 stackableSlot.myItem.Amount += _amount;
                 return stackableSlot;
             }
-            _slot = stackableSlot;
+            if (lootObject != null)
+            {
+                //(item.maxStack - stackableSlot.myItem.Amount)
+            }
+            _slot = stackableSlot; // remember stackable slot for later
             //return null; // return because if the item is picked up the player will lose value
         }
 
@@ -377,13 +430,17 @@ public class Inventory : MonoBehaviour
             {
                 if (slot.myItem == null)
                 {
-                    if (_slot != null)
+                    if (_slot != null) // if _slot has already been set to stackable slot
                     {
-                        _amount -= _slot.myItem.myItem.maxStack - _slot.myItem.Amount;
+                        _amount -= _slot.myItem.myItem.maxStack - _slot.myItem.Amount; // take away what can be given to stackable slot
                         _slot.myItem.Amount = _slot.myItem.myItem.maxStack;
                         _slot = slot;
                     }
 
+                    //Debug.Log($"[Inventory][AddItem][!IsHotbarFull()][slot.myItem is null] {itemPrefab.ToString()}, {_slot.name}, {_item.name}");
+                    Debug.Log(itemPrefab);
+                    Debug.Log(_slot);
+                    Debug.Log(_item);
                     Instantiate(itemPrefab, _slot.transform).Initialize(_item, _slot);
                     _slot.myItem.Amount = _amount;
                     if (_slot.border != null) { _slot.border.SetAsLastSibling(); }
@@ -397,7 +454,7 @@ public class Inventory : MonoBehaviour
             {
                 if (slot.myItem == null)
                 {
-                    if (_slot != null)
+                    if (_slot != null) // if _slot has already been set to stackable slot
                     {
                         _amount -= _slot.myItem.myItem.maxStack - _slot.myItem.Amount;
                         _slot.myItem.Amount = _slot.myItem.myItem.maxStack;
@@ -413,7 +470,7 @@ public class Inventory : MonoBehaviour
         }
         if (_slot == stackableSlot) { _slot = null; } // If slot never changed from stackable then it means inventory was full
 
-        return _slot;
+        return _slot;*/
 
     }
 

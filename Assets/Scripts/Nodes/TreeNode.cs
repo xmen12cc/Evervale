@@ -17,6 +17,8 @@ public class TreeNode : Node
     private void Start()
     {
         player = TD_PlayerController.Singleton.gameObject;
+
+        base.Start();
     }
 
     /*private void Update()

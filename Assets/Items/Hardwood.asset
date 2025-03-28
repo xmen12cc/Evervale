@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
-  m_Name: Lingonberry
+  m_Name: Hardwood
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1279202541, guid: c419824596849c24bad46d1588c769b9, type: 3}
+  sprite: {fileID: -288844623, guid: c419824596849c24bad46d1588c769b9, type: 3}
   itemTag: 1
-  value: 10
-  description: Winter Berry
+  value: 25
+  description: Common Wood found around big trees in forests
   maxStack: 10
-  itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}
+  itemPrefab: {fileID: 6239120630763112629, guid: a67a9a228aed95344b32f6f6271a22f3, type: 3}

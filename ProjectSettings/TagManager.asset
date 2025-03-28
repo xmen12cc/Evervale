@@ -8,6 +8,7 @@ TagManager:
   - Tree
   - Farmland
   - Tool
+  - Loot
   layers:
   - Default
   - TransparentFX
