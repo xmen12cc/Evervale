@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 409342773, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
   itemTag: 2
-  value: 0
+  value: 50
   description: 
   maxStack: 1
   itemPrefab: {fileID: 611253536576495295, guid: 05d3e75b45cf89e4fb8d0f0fb7391cf9, type: 3}

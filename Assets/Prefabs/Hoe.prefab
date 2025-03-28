@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9111952102484281233}
   m_Layer: 0
   m_Name: Hoe
-  m_TagString: Untagged
+  m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1, y: 0.5, z: 0.1}
+  m_Size: {x: 1.2, y: 0.5, z: 0.4}
   m_Center: {x: 0.25, y: 0.15, z: 0}
 --- !u!114 &9111952102484281233
 MonoBehaviour:
@@ -70,7 +70,9 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   toolModel: {fileID: 7637153033981182566}
   toolTag: 3
+  damage: 1
   swingSpeed: 1
+  isActionPlaying: 0
 --- !u!1 &3496599068959318999
 GameObject:
   m_ObjectHideFlags: 0

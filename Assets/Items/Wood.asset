@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
-  m_Name: Pickaxe
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1810548387, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
-  itemTag: 2
-  value: 50
-  description: 
-  maxStack: 1
-  itemPrefab: {fileID: 3256362034542899794, guid: f42afbdb08400114ea2c99055fa4b6b1, type: 3}
+  sprite: {fileID: -1234047991, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
+  itemTag: 1
+  value: 25
+  description: Common Wood found around forests
+  maxStack: 10
+  itemPrefab: {fileID: 6239120630763112629, guid: a67a9a228aed95344b32f6f6271a22f3, type: 3}

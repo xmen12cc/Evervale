@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class TD_PlayerController : MonoBehaviour
 {
 
+    public static TD_PlayerController Singleton;
+
     [Header("Movement")]
     public float speed = 10f;
     private Vector2 move;
@@ -18,6 +20,11 @@ public class TD_PlayerController : MonoBehaviour
 
     [Header("temp")]
     public CharacterAnimator character;
+
+    private void Awake()
+    {
+        Singleton = this;
+    }
 
     void Start()
     {
@@ -46,7 +53,7 @@ public class TD_PlayerController : MonoBehaviour
         if (movement.magnitude > 0.01f)
         {
             lastDirection = movement;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastDirection), 0.15f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastDirection), 0.35f);
         }
     }
 

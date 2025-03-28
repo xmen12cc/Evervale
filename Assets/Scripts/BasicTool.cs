@@ -12,6 +12,7 @@ public class BasicTool : MonoBehaviour
 
     [Header("Tool Features")]
     public ToolTag toolTag;
+    public float damage = 1f;
     public float swingSpeed = 1;
 
     Inventory inventory = Inventory.Singleton;
@@ -74,9 +75,9 @@ public class BasicTool : MonoBehaviour
         {
             if (toolTag == ToolTag.Mining)
             {
-                Debug.Log("Hit Ore! Breaking...");
+                //Debug.Log("Hit Ore!");
                 // Add logic to apply damage or trigger destruction
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
             }
         }
 
@@ -84,9 +85,9 @@ public class BasicTool : MonoBehaviour
         {
             if (toolTag == ToolTag.Woodcutting)
             {
-                Debug.Log("Hit Tree! Chopping...");
+                //Debug.Log("Hit Tree!");
                 // Add logic to apply damage or trigger destruction
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
             }
         }
 
@@ -94,9 +95,9 @@ public class BasicTool : MonoBehaviour
         {
             if (toolTag == ToolTag.Farming)
             {
-                Debug.Log("Hit Bush! Farming...");
+                //Debug.Log("Hit Bush!");
                 // Add logic to apply damage or trigger destruction
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
             }
         }
     }

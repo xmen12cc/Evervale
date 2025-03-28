@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -1234047991, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
   itemTag: 1
-  value: 0
+  value: 10
   description: Spring Berry
   maxStack: 10
   itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}

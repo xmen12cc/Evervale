@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public enum Backpack
 {
@@ -352,18 +353,67 @@ public class Inventory : MonoBehaviour
     return inventorySlots;
     }
 
-    public void AddItem(Item item)
+    public InventorySlot AddItem(Item item, int amount = 1)
     {
-        foreach (InventorySlot slot in inventorySlots)
+        InventorySlot _slot = null;
+        Item _item = item;
+        int _amount = amount;
+
+        InventorySlot stackableSlot = FindStackableSlot(_item);
+        if (stackableSlot != null)
         {
-            if (slot.myItem == null)
+            if (stackableSlot.myItem.Amount + _amount <= stackableSlot.myItem.myItem.maxStack)
             {
-                InventoryItem newItem = Instantiate(itemPrefab);
-                newItem.Initialize(item, slot);
-                slot.myItem = newItem;
-                return;
+                stackableSlot.myItem.Amount += _amount;
+                return stackableSlot;
+            }
+            _slot = stackableSlot;
+            //return null; // return because if the item is picked up the player will lose value
+        }
+
+        if (!IsHotbarFull())
+        {
+            foreach (InventorySlot slot in hotbarSlots)
+            {
+                if (slot.myItem == null)
+                {
+                    if (_slot != null)
+                    {
+                        _amount -= _slot.myItem.myItem.maxStack - _slot.myItem.Amount;
+                        _slot.myItem.Amount = _slot.myItem.myItem.maxStack;
+                        _slot = slot;
+                    }
+
+                    Instantiate(itemPrefab, _slot.transform).Initialize(_item, _slot);
+                    _slot.myItem.Amount = _amount;
+                    if (_slot.border != null) { _slot.border.SetAsLastSibling(); }
+                    break;
+                }
             }
         }
+        else
+        {
+            foreach (InventorySlot slot in inventorySlots)
+            {
+                if (slot.myItem == null)
+                {
+                    if (_slot != null)
+                    {
+                        _amount -= _slot.myItem.myItem.maxStack - _slot.myItem.Amount;
+                        _slot.myItem.Amount = _slot.myItem.myItem.maxStack;
+                        _slot = slot;
+                    }
+
+                    Instantiate(itemPrefab, slot.transform).Initialize(_item, slot);
+                    _slot.myItem.Amount = _amount;
+                    if (_slot.border != null) { _slot.border.SetAsLastSibling(); }
+                    break;
+                }
+            }
+        }
+        if (_slot == stackableSlot) { _slot = null; } // If slot never changed from stackable then it means inventory was full
+
+        return _slot;
 
     }
 
