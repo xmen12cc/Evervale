@@ -2,14 +2,26 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+    public static AudioManager Instance { get; private set; }
 
-    public AudioClip background;
+    public AudioSource musicSource;
+    public AudioSource SFXSource;
 
-    private void Start()
+    private void Awake()
     {
-        musicSource.clip = background;
-        musicSource.Play();
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
-} 
+
+    public void SetMusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        SFXSource.volume = volume;
+    }
+}
