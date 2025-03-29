@@ -10,6 +10,7 @@ TagManager:
   - Tool
   - Loot
   - SellZone
+  - Bush
   layers:
   - Default
   - TransparentFX
