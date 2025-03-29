@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3923206913486761111}
   - component: {fileID: 4760353193376810891}
   - component: {fileID: 3383465873390384532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LootObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3165110983529828567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ObjectContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

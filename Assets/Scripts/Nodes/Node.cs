@@ -7,6 +7,7 @@ public class Node : MonoBehaviour
 {
     [Header("Node Settings")]
     public float health = 100f;
+    [HideInInspector] public float maxHealth = 100f;
     protected bool isDestroyed = false;
 
     [HideInInspector] public List<GameObject> triggeredObjects = new List<GameObject>();
@@ -17,6 +18,8 @@ public class Node : MonoBehaviour
 
     public virtual void Start()
     {
+        maxHealth = health;
+
         lootSpawner = GameObjectFinder.FindChildRecursive(gameObject, "LootSpawner").GetComponent<LootSpawner>();
         if (lootSpawner != null) { lootSpawner.possibleLoot = lootPool; }
     }
@@ -45,7 +48,7 @@ public class Node : MonoBehaviour
             Debug.Log("Spawn Loot");
         }
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
     }
