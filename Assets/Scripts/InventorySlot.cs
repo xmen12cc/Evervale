@@ -7,6 +7,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
     public InventoryItem myItem { get; set; }
     public bool interactable = true;
     private bool isHoldingItem = false;
+    public bool isShopSlot = false;
+
 
     private Vector3 originalPosition;
     private InventorySlot originalSlot;
@@ -69,12 +71,25 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
                 isHoldingItem = false;
                 Debug.Log("[InventorySlot][OnPointerUp][_ClickReleased]");
 
-                // Check if we released over a valid slot
                 InventorySlot targetSlot = GetSlotUnderCursor();
-                //Debug.Log("[InventorySlot][OnPointerUp][targetSlot = GetSlotUnderCursor()]");
                 if (targetSlot != null)
                 {
-                    if (targetSlot.myItem == null)
+                    if (targetSlot.isShopSlot)
+                    {
+                        // SELLING logic for the shop
+                        Item item = Inventory.carriedItem.myItem;
+                        int amount = Inventory.carriedItem.Amount;
+                        int value = item.value * amount;
+
+                        Inventory.Singleton.PlayerGold += value;
+                        Debug.Log($"[SOLD] {item.name} x{amount} for {value} gold.");
+
+                        Inventory.carriedItem.activeSlot.myItem = null;
+                        Destroy(Inventory.carriedItem.gameObject);
+                        Inventory.carriedItem = null;
+                        return;
+                    }
+                    else if (targetSlot.myItem == null)
                     {
                         targetSlot.SetItem(Inventory.carriedItem);
                         Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} To TargetSlot]");
@@ -85,13 +100,12 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
                         originalSlot.SetItem(targetSlotItem);
                         Debug.Log($"[InventorySlot][OnPointerUp][Moved {originalSlot.myItem.myItem.name} To OriginalSlot]");
                         targetSlot.SetItem(Inventory.carriedItem);
-                        originalSlot.myItem = targetSlotItem; // TEMP FIX FOR ORIGINAL SLOT
+                        originalSlot.myItem = targetSlotItem;
                         Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} To TargetSlot]");
                     }
                 }
                 else
                 {
-                    // Reset to original slot if not dropped on a valid one
                     originalSlot.SetItem(Inventory.carriedItem);
                     Debug.Log($"[InventorySlot][OnPointerUp][Moved {Inventory.carriedItem.myItem.name} Back To OriginalSlot]");
                 }
