@@ -189,7 +189,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4705488111911091740}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   coverDistance: 3
   promptMode: 0
   threshold: 0.5
+  faceCamera: 1
   prompt: Press E
 --- !u!135 &7226769412919129839
 SphereCollider:
