@@ -940,6 +940,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BushNode
       objectReference: {fileID: 0}
+    - target: {fileID: 3758692542698085801, guid: 34a7278b6d605e34a82c5974dd2e2124, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2087084520}
     - target: {fileID: 8666600292003055358, guid: 34a7278b6d605e34a82c5974dd2e2124, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1744998
