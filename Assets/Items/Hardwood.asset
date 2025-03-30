@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 25
   description: Common Wood found around big trees in forests
   maxStack: 10
-  itemPrefab: {fileID: 6239120630763112629, guid: a67a9a228aed95344b32f6f6271a22f3, type: 3}
+  itemPrefab: {fileID: 6239120630763112629, guid: ea6baa157f17dcd4196fb09cf4f6dd41, type: 3}

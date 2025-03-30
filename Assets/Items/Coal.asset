@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 50
   description: Found around stone
   maxStack: 10
-  itemPrefab: {fileID: 4575644919441342879, guid: 56700d5aa61795e4b8a6c2a645507aa0, type: 3}
+  itemPrefab: {fileID: 4575644919441342879, guid: c76033ac0cd5a8d499e37a42aa1969fc, type: 3}

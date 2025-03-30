@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
   m_Name: Club
   m_EditorClassIdentifier: 
-  sprite: {fileID: 409342773, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
+  sprite: {fileID: -522851707, guid: 84c6f43231186cd48a00b2aaa65559eb, type: 3}
   itemTag: 2
   value: 50
   description: 
