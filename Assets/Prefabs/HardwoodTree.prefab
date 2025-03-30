@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8927480621710133239}
   - component: {fileID: 8825708538518832825}
   m_Layer: 0
-  m_Name: TreeNode
+  m_Name: HardwoodTree
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -94,27 +94,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbb9d4fb87435449a050fa996c3671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 28
   maxHealth: 5
   triggeredObjects: []
   lootSpawner: {fileID: 7534263449215130899}
   lootPool:
-  - item: {fileID: 11400000, guid: bd74e1461d13f2f40a9d3c31beaddc46, type: 2}
+  - item: {fileID: 11400000, guid: 37c4898fe442cb0459b335fe542cb8bc, type: 2}
+    amount: 3
+    independant: 0
+    chance: 2
+  - item: {fileID: 11400000, guid: 70e2ca29472ea8c44acc100abd2714ea, type: 2}
+    amount: 3
+    independant: 0
+    chance: 1
+  - item: {fileID: 11400000, guid: 70e2ca29472ea8c44acc100abd2714ea, type: 2}
     amount: 2
-    independant: 0
-    chance: 1
-  - item: {fileID: 11400000, guid: ba0004776f290834b99481c29bda9e57, type: 2}
-    amount: 3
-    independant: 0
-    chance: 1
-  - item: {fileID: 11400000, guid: ba0004776f290834b99481c29bda9e57, type: 2}
-    amount: 3
     independant: 1
     chance: 2
   - item: {fileID: 11400000, guid: ba0004776f290834b99481c29bda9e57, type: 2}
+    amount: 4
+    independant: 1
+    chance: 1
+  - item: {fileID: 11400000, guid: ba0004776f290834b99481c29bda9e57, type: 2}
     amount: 2
     independant: 1
-    chance: 4
+    chance: 2
   fallSpeed: 15
   fallAngle: 90
   treeRotation: {fileID: 7275538309409479709}
@@ -206,6 +210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2447919112049435198}
     m_Modifications:
+    - target: {fileID: 1557532568394336172, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1147921052205337550, guid: 30e4d678991647a4b89de621d540af5b, type: 3}
     - target: {fileID: 4395983724798006461, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -213,14 +221,26 @@ PrefabInstance:
     - target: {fileID: 5680200832695252408, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 11c7886c0ee8c5c4aa0ef320967e68e6, type: 2}
+      objectReference: {fileID: 2100000, guid: aa68a835da02fc048ad6f27935879a17, type: 2}
     - target: {fileID: 5680200832695252408, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 938444c8b46e5374b80c4ad3c48fb241, type: 2}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.013200045
+      value: -0.011
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalPosition.y
@@ -228,23 +248,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.019000083
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9722361
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000081460335
+      value: 0.00000007919868
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.23400214
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.000000019061893
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -252,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 27.066
       objectReference: {fileID: 0}
     - target: {fileID: 6701204936613680675, guid: 43803f6777875df4fb70a956b9fb1581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -328,6 +348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stump_01
       objectReference: {fileID: 0}
+    - target: {fileID: 8313632506172493172, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aa68a835da02fc048ad6f27935879a17, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

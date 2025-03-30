@@ -960,7 +960,7 @@ GameObject:
   - component: {fileID: 8192887428779078369}
   - component: {fileID: 1427583701756047111}
   m_Layer: 0
-  m_Name: StoneNode
+  m_Name: StoneDeposit
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a583aeb1dd480545be5f4b81ed6bfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 10
   maxHealth: 5
   triggeredObjects: []
   lootSpawner: {fileID: 2779149939218955445}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1665353519671410343}
   - component: {fileID: 9111952102484281233}
   m_Layer: 0
-  m_Name: Hoe
+  m_Name: IronHoe
   m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

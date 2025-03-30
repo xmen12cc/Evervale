@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 10
   description: Winter Berry
   maxStack: 10
-  itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}
+  itemPrefab: {fileID: 377115248408979553, guid: 26a88edf01294b544a3f283d5496e891, type: 3}

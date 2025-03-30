@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8927480621710133239}
   - component: {fileID: 8825708538518832825}
   m_Layer: 0
-  m_Name: TreeNode
+  m_Name: NormalTree
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcbb9d4fb87435449a050fa996c3671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 10
   maxHealth: 5
   triggeredObjects: []
   lootSpawner: {fileID: 7534263449215130899}
@@ -102,7 +102,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: bd74e1461d13f2f40a9d3c31beaddc46, type: 2}
     amount: 2
     independant: 0
-    chance: 1
+    chance: 3
   - item: {fileID: 11400000, guid: ba0004776f290834b99481c29bda9e57, type: 2}
     amount: 3
     independant: 0

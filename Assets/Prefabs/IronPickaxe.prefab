@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 6323865804013174728}
   - component: {fileID: 8408180970173601023}
   m_Layer: 0
-  m_Name: Pickaxe
+  m_Name: IronPickaxe
   m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

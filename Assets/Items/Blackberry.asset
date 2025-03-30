@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 10
   description: Fall Berry
   maxStack: 10
-  itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}
+  itemPrefab: {fileID: 377115248408979553, guid: 90409df19fa432c4d8b9912533067a07, type: 3}

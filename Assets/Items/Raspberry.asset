@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 10
   description: Spring Berry
   maxStack: 10
-  itemPrefab: {fileID: 377115248408979553, guid: 880c97d440e74d14e829cfa63549c663, type: 3}
+  itemPrefab: {fileID: 377115248408979553, guid: e5e5ffa1254c64c4fae0b70dce56f3c2, type: 3}

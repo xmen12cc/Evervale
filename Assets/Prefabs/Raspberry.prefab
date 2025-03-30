@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 739239791256543333}
   - component: {fileID: 3449846458717482448}
   m_Layer: 0
-  m_Name: blueberry
+  m_Name: Raspberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4330e3b904532af48b3e34b0df9e0b8c, type: 2}
+  - {fileID: 2100000, guid: a79ae61e53496924895fdd7e133966b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

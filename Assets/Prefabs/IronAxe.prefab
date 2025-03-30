@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7055572701343567013}
   - component: {fileID: 8986601832539644869}
   m_Layer: 0
-  m_Name: Axe
+  m_Name: IronAxe
   m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
