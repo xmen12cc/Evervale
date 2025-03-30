@@ -27,7 +27,8 @@ public class ProceduralSpawnManager : MonoBehaviour
             if (spawnPosition != Vector3.zero)
             {
                 GameObject objToSpawn = spawnableObjects[Random.Range(0, spawnableObjects.Length)];
-                Instantiate(objToSpawn, spawnPosition, Quaternion.identity);
+                Quaternion randomYRotation = Quaternion.Euler(0, Random.Range(0, 360f), 0); // keep upright
+                Instantiate(objToSpawn, spawnPosition, randomYRotation);
                 spawnedPositions.Add(spawnPosition);
             }
         }
