@@ -47,7 +47,7 @@ public class StoneNode : Node
         {
             BasicTool tool = other.GetComponent<BasicTool>();
 
-            if (tool.isActionPlaying && tool.toolTag == ToolTag.Mining)
+            if (tool.isActionPlaying && (tool.toolTag == ToolTag.Mining || tool.toolTag == ToolTag.Hammering))
             {
                 //Debug.Log("Stone Received Hit!");
                 // Add logic to apply damage

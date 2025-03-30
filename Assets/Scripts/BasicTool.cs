@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public enum ToolTag { None, Mining, Woodcutting, Farming, Fighting }
+public enum ToolTag { None, Mining, Woodcutting, Farming, Fighting, Hammering }
 
 public class BasicTool : MonoBehaviour
 {
@@ -46,7 +46,7 @@ public class BasicTool : MonoBehaviour
 
                     if (!stateInfo.IsName("Wallop") && !isActionPlaying)
                     {
-                        if (toolTag == ToolTag.Mining || toolTag == ToolTag.Woodcutting || toolTag == ToolTag.Farming)
+                        if (toolTag == ToolTag.Mining || toolTag == ToolTag.Woodcutting || toolTag == ToolTag.Farming || toolTag == ToolTag.Hammering)
                         {
                             //Debug.Log("Wallop");
                             playerAnimator.SetTrigger("Wallop");

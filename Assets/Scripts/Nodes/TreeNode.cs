@@ -93,7 +93,7 @@ public class TreeNode : Node
         {
             BasicTool tool = other.GetComponent<BasicTool>();
 
-            if (tool.isActionPlaying && tool.toolTag == ToolTag.Woodcutting)
+            if (tool.isActionPlaying && (tool.toolTag == ToolTag.Woodcutting || tool.toolTag == ToolTag.Hammering))
             {
                 //Debug.Log("Tree Received Hit!");
                 // Add logic to apply damage

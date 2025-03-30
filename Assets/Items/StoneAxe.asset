@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f362eb0d5fe99f341b0c6155330dc4df, type: 3}
-  m_Name: Axe
+  m_Name: StoneAxe
   m_EditorClassIdentifier: 
   sprite: {fileID: 409342773, guid: a6f0c87930d68fa47aee8acc69e2c8fb, type: 3}
   itemTag: 2
   value: 50
   description: 
   maxStack: 1
-  itemPrefab: {fileID: 611253536576495295, guid: 05d3e75b45cf89e4fb8d0f0fb7391cf9, type: 3}
+  itemPrefab: {fileID: 611253536576495295, guid: 2f39fb7e2189b5144a76c4fcd20e3852, type: 3}

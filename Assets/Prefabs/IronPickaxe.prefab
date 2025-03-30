@@ -135,7 +135,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   toolModel: {fileID: 3092317980203300815}
   toolTag: 1
-  damage: 1
+  damage: 4
   swingSpeed: 1
   isActionPlaying: 0
 --- !u!1 &6331893986606114525
