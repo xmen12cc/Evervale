@@ -15,6 +15,7 @@ public class SellStation : MonoBehaviour, IDropHandler
 
             Inventory.Singleton.PlayerGold += value;
             Debug.Log($"Sold {item.name} x{Inventory.carriedItem.Amount} for {value} gold. Total Gold: {Inventory.Singleton.PlayerGold}");
+            Inventory.OnGoldChanged?.Invoke(Inventory.Singleton.PlayerGold);
 
             Inventory.carriedItem.activeSlot.myItem = null;
             Destroy(Inventory.carriedItem.gameObject);

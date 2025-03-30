@@ -15,6 +15,7 @@ public enum Backpack
 
 public class Inventory : MonoBehaviour
 {
+    public static System.Action<int> OnGoldChanged;
     [Header("Slots")]
     public int numOfInventory = 27;
     public int numOfHotbars = 9;
