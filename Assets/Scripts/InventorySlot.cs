@@ -76,17 +76,14 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
                 {
                     if (targetSlot.isShopSlot)
                     {
-                        // SELLING logic for the shop
-                        Item item = Inventory.carriedItem.myItem;
-                        int amount = Inventory.carriedItem.Amount;
-                        int value = item.value * amount;
-
-                        Inventory.Singleton.PlayerGold += value;
-                        Debug.Log($"[SOLD] {item.name} x{amount} for {value} gold.");
-
-                        Inventory.carriedItem.activeSlot.myItem = null;
-                        Destroy(Inventory.carriedItem.gameObject);
-                        Inventory.carriedItem = null;
+                        Debug.Log("[InventorySlot][OnPointerUp][_ShopSlotDetected]");
+                        targetSlot.SetItem(Inventory.carriedItem); // Show item in slot
+                        SellStation sellStation = targetSlot.GetComponentInParent<SellStation>();
+                        if (sellStation != null)
+                        {
+                            sellStation.TriggerSellConfirmation(Inventory.carriedItem);
+                            Inventory.carriedItem = null; // Clear carried reference
+                        }
                         return;
                     }
                     else if (targetSlot.myItem == null)
@@ -116,6 +113,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerDownHa
         }
         Debug.Log("[InventorySlot][/]");
     }
+
 
     private InventorySlot GetSlotUnderCursor()
     {
