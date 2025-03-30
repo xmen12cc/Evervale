@@ -155,7 +155,7 @@ public class BushNode : Node
         }
     }
 
-    protected override IEnumerator DestroyNode()
+    protected override IEnumerator DestroyNode(float delay = 1f)
     {
         foreach (GameObject berry in berries)
         {

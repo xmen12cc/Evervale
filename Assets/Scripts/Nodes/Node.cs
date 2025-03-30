@@ -36,7 +36,7 @@ public class Node : MonoBehaviour
         }
     }
 
-    protected virtual IEnumerator DestroyNode()
+    protected virtual IEnumerator DestroyNode(float delay = 1f)
     {
         // Placeholder for animation delay
         yield return new WaitForSeconds(0.5f);
@@ -48,7 +48,7 @@ public class Node : MonoBehaviour
             Debug.Log("Spawn Loot");
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay);
 
         Destroy(gameObject);
     }

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 0}
   toolModel: {fileID: 2030958175307842920}
-  toolTag: 2
+  toolTag: 1
   damage: 2
   swingSpeed: 1.1
   isActionPlaying: 0

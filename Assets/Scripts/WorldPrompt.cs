@@ -14,6 +14,7 @@ public class WorldPrompt : MonoBehaviour
     public float coverDistance = 1f;
     public PromptMode promptMode = PromptMode.Linear;
     [Range(0f, 1f)] public float threshold = 0.2f; // % distance from being full. 0.2 would mean anything below 20% is full.
+    public bool faceCamera = true;
     private GameObject player;
 
     [Header("Prompt Settings")]
@@ -24,6 +25,8 @@ public class WorldPrompt : MonoBehaviour
 
     private void Start()
     {
+        if (faceCamera) { transform.rotation = Quaternion.identity; }
+
         GetComponent<SphereCollider>().radius = coverDistance; // used in a trigger loop to see if player has entered range (cover distance) of prompt.
 
         promptTextLabel = GameObjectFinder.FindChildRecursive(gameObject, "PromptText").GetComponent<TextMeshProUGUI>(); // Find the text element being used.
@@ -31,6 +34,12 @@ public class WorldPrompt : MonoBehaviour
 
         rootPanel = GameObjectFinder.FindChildRecursive(gameObject, "RootPanel").GetComponent<RectTransform>();
         initialSize = rootPanel.sizeDelta;
+    }
+
+    public void UpdatePrompt(string newPrompt)
+    {
+        promptTextLabel = GameObjectFinder.FindChildRecursive(gameObject, "PromptText").GetComponent<TextMeshProUGUI>(); // Find the text element being used.
+        promptTextLabel.text = newPrompt;
     }
 
     private void Update()

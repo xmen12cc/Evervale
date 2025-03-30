@@ -28,6 +28,7 @@ public class LootSpawner : MonoBehaviour
                 if (!lootEntry.independant)
                 {
                     SpawnLoot(lootEntry.item, lootEntry.amount);
+                    Debug.Log($"Spawn: {lootEntry.item.name} (x{lootEntry.amount})");
                 }
                 else
                 {
@@ -35,6 +36,7 @@ public class LootSpawner : MonoBehaviour
                     {
                         SpawnLoot(lootEntry.item, 1);
                     }
+                    Debug.Log($"Spawn: {lootEntry.item.name} (x1)");
                 }
             }
         }

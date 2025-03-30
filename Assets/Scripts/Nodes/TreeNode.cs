@@ -56,7 +56,7 @@ public class TreeNode : Node
             base.TakeDamage(damage);
     }
 
-    protected override IEnumerator DestroyNode()
+    protected override IEnumerator DestroyNode(float delay = 1f)
     {
         isFalling = true;
 
