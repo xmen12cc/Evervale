@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class ProceduralSpawnManager : MonoBehaviour
@@ -58,5 +59,26 @@ public class ProceduralSpawnManager : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = UnityEngine.Color.green; // Set color
+
+        Vector3 position = transform.position;
+        float halfWidth = spawnAreaSize.x / 2;
+        float halfHeight = spawnAreaSize.y / 2;
+
+        // Define corners
+        Vector3 topLeft = position + new Vector3(-halfWidth, 0, halfHeight);
+        Vector3 topRight = position + new Vector3(halfWidth, 0, halfHeight);
+        Vector3 bottomRight = position + new Vector3(halfWidth, 0, -halfHeight);
+        Vector3 bottomLeft = position + new Vector3(-halfWidth, 0, -halfHeight);
+
+        // Draw square
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft);
     }
 }
