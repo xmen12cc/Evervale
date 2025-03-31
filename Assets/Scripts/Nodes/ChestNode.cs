@@ -42,7 +42,7 @@ public class ChestNode : Node
                 Destroy(rootLock);
                 promptObject.UpdatePrompt("Press E");
                 canOpen = true;
-                StartCoroutine(ShakeChest(0.75f));
+                //StartCoroutine(ShakeChest(0.75f));
             }
         }
 
