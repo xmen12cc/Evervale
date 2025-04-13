@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/The Woods.unity
     guid: ce011ae7ff41c154aad39bb827798464
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 46a2a24d95fea87458dfb23a33263a34
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
